@@ -37,16 +37,15 @@
 </div>
   <script>
 var ctx = document.getElementById("myChart");
-ctx.canvas.width = 300;
-ctx.canvas.height = 300;
+Chart.defaults.global.maintainAspectRatio = false;
 var myChart = new Chart(ctx, {
 type: 'line',
 data: {
-  labels: ["January", "February", "March", "April", "May", "June", "July"],
+  labels: ["January", "February", "March", "April", "May", "June", "July","August","September","Octomber","November","December"],
   datasets: [
       {
           label: "My First dataset",
-          fill: false,
+          fill: true,
           lineTension: 0.1,
           backgroundColor: "rgba(75,192,192,0.4)",
           borderColor: "rgba(75,192,192,1)",
@@ -63,9 +62,32 @@ data: {
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: [65, 59, 80, 81, 56, 55, 40],
+          data: [65, 59, 80, 81, 56, 55, 40,110,10,50,80,80,80],
+          spanGaps: false,
+      },
+      {
+          label: "My First dataset",
+          fill: true,
+          lineTension: 0.1,
+          backgroundColor: "rgba(65,29,192,0.4)",
+          borderColor: "rgba(75,192,192,1)",
+          borderCapStyle: 'butt',
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: 'miter',
+          pointBorderColor: "rgba(75,192,192,1)",
+          pointBackgroundColor: "#fff",
+          pointBorderWidth: 1,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: "rgba(75,192,192,1)",
+          pointHoverBorderColor: "rgba(220,220,220,1)",
+          pointHoverBorderWidth: 2,
+          pointRadius: 1,
+          pointHitRadius: 10,
+          data: [100, 5, 30, 20, 56, 55, 40,110,10,50,80,80,80],
           spanGaps: false,
       }
+
   ]
 },
 height:100,
@@ -76,9 +98,14 @@ options: {
                 beginAtZero:true
             }
         }]
-    }
+    },
+    legend: {
+               position:'bottom'
+           }
+
 }
 });
+Chart.defaults.global.responsive = true;
 </script>
 
 
