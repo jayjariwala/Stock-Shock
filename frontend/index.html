@@ -4,7 +4,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <link rel="stylesheet" href="css/styles.css" type="text/css" />
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" />
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -44,7 +44,7 @@ data: {
   labels: ["January", "February", "March", "April", "May", "June", "July","August","September","Octomber","November","December"],
   datasets: [
       {
-          label: "My First dataset",
+          label: "Facebook",
           fill: true,
           lineTension: 0.1,
           backgroundColor: "rgba(75,192,192,0.4)",
@@ -66,15 +66,15 @@ data: {
           spanGaps: false,
       },
       {
-          label: "My First dataset",
+          label: "Twitter",
           fill: true,
           lineTension: 0.1,
           backgroundColor: "rgba(65,29,192,0.4)",
           borderColor: "rgba(75,192,192,1)",
-          borderCapStyle: 'butt',
+          borderCapStyle: 'round',
           borderDash: [],
           borderDashOffset: 0.0,
-          borderJoinStyle: 'miter',
+          borderJoinStyle: 'round',
           pointBorderColor: "rgba(75,192,192,1)",
           pointBackgroundColor: "#fff",
           pointBorderWidth: 1,
@@ -95,9 +95,11 @@ options: {
     scales: {
         yAxes: [{
             ticks: {
-                beginAtZero:true
+                beginAtZero:true,
+                stacked:true
             }
         }]
+
     },
     legend: {
                position:'bottom'
@@ -108,9 +110,61 @@ options: {
 Chart.defaults.global.responsive = true;
 </script>
 
+<br/>
+
+</br/>
+</div>
+<div class="container">
+  <div class="input-group">
+     <input type="text" class="form-control">
+     <span class="input-group-btn">
+          <button class="btn btn-default" type="button">Add Stock</button>
+     </span>
+   </div>
+   <div class="stocks">
+        <div class="row">
+          <div class="col-lg-2 code_buttons">
+            <i class="fa fa-remove rmv"></i>
+            <span class="c_text">Facebook</span>
+          </div>
+          <div class="col-lg-2 code_buttons">
+            <i class="fa fa-remove rmv"></i>
+          </div>
+          <div class="col-lg-2 code_buttons">
+            <i class="fa fa-remove rmv"></i>
+          </div>
+          <div class="col-lg-2 code_buttons">
+            <i class="fa fa-remove rmv"></i>
+          </div>
+          <div class="col-lg-2 code_buttons">
+          <i class="fa fa-remove rmv"></i>
+          </div>
+          <div class="col-lg-2 code_buttons">
+          <i class="fa fa-remove rmv"></i>
+          </div>
+          <div class="col-lg-2 code_buttons">
+          <i class="fa fa-remove rmv"></i>
+          </div>
+          <div class="col-lg-2 code_buttons">
+        <i class="fa fa-remove rmv"></i>
+          </div>
+          <div class="col-lg-2 code_buttons">
+            <i class="fa fa-remove rmv"></i>
+          </div>
+
+          <div class="col-lg-2 code_buttons">
+            <i class="fa fa-remove rmv"></i>
+          </div>
+
+
+
+        </div>
+
+  </div>
+
+
 
 </div>
-
 
 
 </body>

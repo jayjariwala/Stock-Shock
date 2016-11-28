@@ -1,5 +1,6 @@
 body{
   background-color: black;
+  padding: 20px;
 }
 .container-body
 {
@@ -8,4 +9,29 @@ body{
 .graph
 {
   height:500px;
+
+}
+.stocks
+{
+  padding: 20px;
+}
+.code_buttons
+{
+  height: 10px;
+  background-color: yellow;
+  margin: 10px;
+  height: 80px;
+}
+.c_text
+{
+  position: absolute;
+  left: 60px;
+  top: 15px;
+
+
+}
+.rmv
+{
+  float: right;
+  margin-top: 7px;
 }
