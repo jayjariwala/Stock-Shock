@@ -24,14 +24,23 @@ body{
 }
 .c_text
 {
-  position: absolute;
-  left: 60px;
-  top: 15px;
 
+text-align: center;
+  margin: 5px;
+font-family: 'Bungee', cursive;
+font-size: 20px;
 
 }
+
 .rmv
 {
   float: right;
   margin-top: 7px;
+
+}
+
+.button
+{
+  margin: 5px;
+
 }
