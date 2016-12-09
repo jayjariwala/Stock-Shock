@@ -1,11 +1,37 @@
 body{
   background-color: black;
-  padding: 20px;
+
 }
 .container-body
 {
   margin-top: 10px;
 }
+.logo-fonts
+{
+font-family: 'Ravi Prakash', cursive;
+font-size: 32px;
+color: white;
+}
+.nav-color
+{
+  color:white;
+}
+.nav > li > a:hover{
+    background-color:#252323 !important;
+}
+
+.nav > li > a:visited{
+    background-color:#252323 !important;
+}
+.custom-nav
+{
+border-radius: 0 !important;
+  background-color:#252323;
+}
+
+
+
+
 .graph
 {
   height:500px;
@@ -18,9 +44,14 @@ body{
 .code_buttons
 {
   height: 10px;
-  background-color: yellow;
+  background-color: #252323;
+  color: #ef6b01;
   margin: 10px;
-  height: 80px;
+}
+.rmv:hover
+{
+  color: white;
+  font-size: 17px;
 }
 .c_text
 {
@@ -29,6 +60,12 @@ text-align: center;
   margin: 5px;
 font-family: 'Bungee', cursive;
 font-size: 20px;
+
+}
+.btn-primary
+{
+  background-image: linear-gradient(to bottom,#252323 0,#252323 100%) !important;
+  border-color: #252323 !important;
 
 }
 

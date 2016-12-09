@@ -10,27 +10,77 @@
 <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
   <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
+<link href="https://fonts.googleapis.com/css?family=Ravi+Prakash" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-<script>
-    var myChart = new Chart({...})
-</script>
+
+<link rel="icon"
+      type="image/png"
+      href="img/logo.png">
+
 <script src="js/jsloader.js"></script>
 
 
 </head>
 <body>
 
+  <nav class="navbar custom-nav" >
+<div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand " href="index.html" ><b><span class="logo-fonts nav-color"> <img src="img/logo.png" width="45px"/>Stock-Shock</span></b></a>
+  </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+
+
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+
+      <li><a href="#" data-toggle="modal" data-target="#myModal" ><span class="nav-color" style="font-family: 'Noto Serif', serif;">About</span></a></li>
+
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</nav>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-
+<br/>
 <div class="container-body">
-    <center>
-      <img src="img/logo.png" width="70px;" /><img src="img/logo_font.jpg" />
-    </center>
+
 
 <div class="graph">
   <canvas id="myChart" width="400" height="400"></canvas>
@@ -47,17 +97,17 @@ data: {
           label: "Facebook",
           fill: true,
           lineTension: 0.1,
-          backgroundColor: "rgba(75,192,192,0.4)",
-          borderColor: "rgba(75,192,192,1)",
+          backgroundColor: "rgba(555,154,192,0.4)",
+          borderColor: "rgba(555,154,192,1)",
           borderCapStyle: 'butt',
           borderDash: [],
           borderDashOffset: 0.0,
           borderJoinStyle: 'miter',
-          pointBorderColor: "rgba(75,192,192,1)",
+          pointBorderColor: "rgba(555,154,192,1)",
           pointBackgroundColor: "#fff",
           pointBorderWidth: 1,
           pointHoverRadius: 5,
-          pointHoverBackgroundColor: "rgba(75,192,192,1)",
+          pointHoverBackgroundColor: "rgba(555,154,192,1)",
           pointHoverBorderColor: "rgba(220,220,220,1)",
           pointHoverBorderWidth: 2,
           pointRadius: 1,
@@ -118,7 +168,7 @@ Chart.defaults.global.responsive = true;
   <div class="input-group">
      <input type="text" class="form-control">
      <span class="input-group-btn">
-          <button class="btn btn-default" type="button">Add Stock</button>
+          <button class=" btn-add btn btn-inverse btn-primary " >Add Stock</button>
      </span>
    </div>
    <div class="stocks">
@@ -130,7 +180,9 @@ Chart.defaults.global.responsive = true;
               <div class="c_text">Facebook <br/>
 
               </div>
-              <button class="btn btn-success btn-xs button">Discard</button><button class="btn btn-danger btn-xs button">Keep</button>
+              <div class="confirm">
+                <button class="btn btn-success btn-xs button">Discard</button><button class="btn btn-danger btn-xs button">Keep</button>
+              </div>
 
           </div>
 
@@ -142,8 +194,10 @@ Chart.defaults.global.responsive = true;
               <div class="c_text">Facebook <br/>
 
               </div>
-              <button class="btn btn-success btn-xs button">Discard</button><button class="btn btn-danger btn-xs button">Keep</button>
 
+                <div class="confirm">
+              <button class="btn btn-success btn-xs button">Discard</button><button class="btn btn-danger btn-xs button">Keep</button>
+            </div>
           </div>
 
 
@@ -155,7 +209,11 @@ Chart.defaults.global.responsive = true;
 
 
 
+
+
 </div>
+
+
 
 
 </body>
