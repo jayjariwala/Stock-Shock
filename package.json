@@ -1,0 +1,24 @@
+{
+  "name": "stock-shock",
+  "version": "1.0.0",
+  "description": "Application that displays stock data in real-time",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jayjariwala/Stock-Shock.git"
+  },
+  "author": "jayjariwala",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jayjariwala/Stock-Shock/issues"
+  },
+  "homepage": "https://github.com/jayjariwala/Stock-Shock#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "ejs": "^2.5.5",
+    "socket.io": "^1.7.1"
+  }
+}
