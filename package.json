@@ -19,6 +19,7 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "ejs": "^2.5.5",
+    "mongoose": "^4.7.2",
     "socket.io": "^1.7.1",
     "yahoo-finance": "^0.2.16"
   }

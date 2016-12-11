@@ -166,6 +166,13 @@ Chart.defaults.global.responsive = true;
 </br/>
 </div>
 <div class="container">
+
+<div class="error">
+
+</div>
+
+
+
       <form action="" method="none">
   <div class="input-group">
      <input type="text" class="form-control" id="m">
@@ -224,6 +231,12 @@ $('form').submit(function(){
   socket.emit('stock code',$('#m').val());
   $('#m').val('');
   return false;
+});
+socket.on('stock code',function(stockCode){
+  if(stockCode === "stockerr")
+  {
+    $('.error').html("<div class='alert alert-danger'><strong>Wrong Stock Code!!</strong> Please enter a valid Stock Code. Don't know stock code for a specific company? Please Refer <a href='http://eoddata.com/symbols.aspx' target='_blank'> Stock Code List</a></div>");
+  }
 })
 </script>
 
