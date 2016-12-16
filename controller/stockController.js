@@ -21,10 +21,45 @@ module.exports = function(app,io)
           io.emit('stock code','stockerr');
         }
         else {
-          stock_data.find({stock_code : snapshot.symbol},function(err,available){
-            console.log("The Stock Availability: "+available);
+          stock_data.find({stock_code : stockCode},function(err,available){
+            if(available =="")
+            {
+              var timestamp = Math.floor(Date.now() /1000);
+              var processid= process.pid;
+              var ranNum = Math.random() * (100 - 0) + 100;
+              var sid= timestamp+''+processid+''+ranNum;
+              var userstock = new stock_data({
+                s_id:sid,
+                stock_code:snapshot.symbol
+                });
+                userstock.save(function(err){
+                  if(err) throw err;
+                  console.log("information stored successfully");
+                  stock_data.find({},function(err,allstocks){
+                    var retrivedstocks =[];
+                      allstocks.forEach(function(each){
+
+                        retrivedstocks.push(each.stock_code);
+                      })
+                      console.log(retrivedstocks.toString());
+                  yahooFinance.historical({
+                        symbols:retrivedstocks,
+                        from:'2016-01-01',
+                        to:'2016-12-01',
+                        period:'m'
+                      },function(err,stockhis){
+                        console.log(stockhis);
+                      });
+                  })
+                });
+            }
+            else {
+                  io.emit('stock code', 'stockavail');
+            }
+
           });
 
+          /*
           yahooFinance.historical({
             symbol:stockCode,
             from:'2016-01-01',
@@ -32,10 +67,7 @@ module.exports = function(app,io)
             period:'m'
           },function(err,stock){
 
-            var timestamp = Math.floor(Date.now() /1000);
-            var processid= process.pid;
-            var ranNum = Math.random() * (100 - 0) + 100;
-            var sid= timestamp+''+processid+''+ranNum;
+
             var stock_d = [];
 
             for(var i=0 ; i< stock.length  ; i++)
@@ -45,18 +77,11 @@ module.exports = function(app,io)
 
         /*    console.log("This Should be 12:"+stock_d.length);
 
-            var userstock = new stock_data({
-              s_id:sid,
-              stock_code:stock,
-              stock_name:snapshot.name,
-              Stock_values: ['a','b','c']
-              });
+             */
+      /*    });  */
 
-              userstock.save(function(err){
-                if(err) throw err;
-                console.log("information stored successfully");
-              }) */
-          });
+
+
         }
 
 

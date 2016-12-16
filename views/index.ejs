@@ -237,6 +237,11 @@ socket.on('stock code',function(stockCode){
   {
     $('.error').html("<div class='alert alert-danger'><strong>Wrong Stock Code!!</strong> Please enter a valid Stock Code. Don't know stock code for a specific company? Please Refer <a href='http://eoddata.com/symbols.aspx' target='_blank'> Stock Code List</a></div>");
   }
+  if(stockCode === "stockavail")
+  {
+    $('.error').html("<div class='alert alert-danger'><strong>Stock already exist!!</strong> see ? its there</div>");
+  }
+
 })
 </script>
 

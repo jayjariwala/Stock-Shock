@@ -12,9 +12,7 @@ createSchema : function(mongoose)
   var Schema=mongoose.Schema;
     var stockSchema= new Schema({
       s_id:String,
-      stock_code:String,
-      stock_name:String,
-      Stock_values: Object
+      stock_code:String
     });
 
   return user=mongoose.model('user_stock',stockSchema);
