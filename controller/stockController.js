@@ -5,7 +5,9 @@ var connection=model.getConnection();
 
 var stock_data=model.createSchema(connection);
 
-
+var retrivedstocks =[];
+var sendfinalstock =[];
+var stockprice=[];
 module.exports = function(app,io)
 {
   app.get('/',function(req,res){
@@ -13,6 +15,55 @@ module.exports = function(app,io)
     res.end();
   });
   io.on('connection',function(socket){
+    stock_data.find({},function(err,allstocks){
+        allstocks.forEach(function(each){
+          retrivedstocks.push(each.stock_code);
+        })
+    yahooFinance.historical({
+          symbols:retrivedstocks,
+          from:'2016-01-01',
+          to:'2016-12-01',
+          period:'m'
+        },function(err,stockhis){
+
+          retrivedstocks.forEach(function(allstocks){
+
+            var sobj=stockhis[allstocks];
+            sobj.forEach(function(data){
+              stockprice.push(data.close);
+            })
+
+            var stockobj={
+              label: allstocks,
+              fill: true,
+              lineTension: 0.1,
+              backgroundColor: "rgba(555,154,192,0.4)",
+              borderColor: "rgba(555,154,192,1)",
+              borderCapStyle: 'butt',
+              borderDash: [],
+              borderDashOffset: 0.0,
+              borderJoinStyle: 'miter',
+              pointBorderColor: "rgba(555,154,192,1)",
+              pointBackgroundColor: "#fff",
+              pointBorderWidth: 1,
+              pointHoverRadius: 5,
+              pointHoverBackgroundColor: "rgba(555,154,192,1)",
+              pointHoverBorderColor: "rgba(220,220,220,1)",
+              pointHoverBorderWidth: 2,
+              pointRadius: 1,
+              pointHitRadius: 10,
+              data: stockprice,
+              spanGaps: false,
+            }
+
+            sendfinalstock.push(stockobj);
+
+          });
+          console.log("THIS IS FINAL BOSS"+sendfinalstock);
+          io.emit('user connection',stockhis);
+        });
+    })
+
     socket.on('stock code',function(stockCode){
       yahooFinance.snapshot({symbol:stockCode,fields:['n']},function(err,snapshot){
 
@@ -36,7 +87,7 @@ module.exports = function(app,io)
                   if(err) throw err;
                   console.log("information stored successfully");
                   stock_data.find({},function(err,allstocks){
-                    var retrivedstocks =[];
+
                       allstocks.forEach(function(each){
 
                         retrivedstocks.push(each.stock_code);

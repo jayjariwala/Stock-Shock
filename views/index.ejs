@@ -86,80 +86,13 @@
 <div class="graph">
   <canvas id="myChart" width="400" height="400"></canvas>
 </div>
+  <div id="graph">
   <script>
-var ctx = document.getElementById("myChart");
-Chart.defaults.global.maintainAspectRatio = false;
-var myChart = new Chart(ctx, {
-type: 'line',
-data: {
-  labels: ["January", "February", "March", "April", "May", "June", "July","August","September","Octomber","November","December"],
-  datasets: [
-      {
-          label: "Facebook",
-          fill: true,
-          lineTension: 0.1,
-          backgroundColor: "rgba(555,154,192,0.4)",
-          borderColor: "rgba(555,154,192,1)",
-          borderCapStyle: 'butt',
-          borderDash: [],
-          borderDashOffset: 0.0,
-          borderJoinStyle: 'miter',
-          pointBorderColor: "rgba(555,154,192,1)",
-          pointBackgroundColor: "#fff",
-          pointBorderWidth: 1,
-          pointHoverRadius: 5,
-          pointHoverBackgroundColor: "rgba(555,154,192,1)",
-          pointHoverBorderColor: "rgba(220,220,220,1)",
-          pointHoverBorderWidth: 2,
-          pointRadius: 1,
-          pointHitRadius: 10,
-          data: [65, 59, 80, 81, 56, 55, 40,110,10,50,80,80],
-          spanGaps: false,
-      },
-      {
-          label: "Twitter",
-          fill: true,
-          lineTension: 0.1,
-          backgroundColor: "rgba(65,29,192,0.4)",
-          borderColor: "rgba(75,192,192,1)",
-          borderCapStyle: 'round',
-          borderDash: [],
-          borderDashOffset: 0.0,
-          borderJoinStyle: 'round',
-          pointBorderColor: "rgba(75,192,192,1)",
-          pointBackgroundColor: "#fff",
-          pointBorderWidth: 1,
-          pointHoverRadius: 5,
-          pointHoverBackgroundColor: "rgba(75,192,192,1)",
-          pointHoverBorderColor: "rgba(220,220,220,1)",
-          pointHoverBorderWidth: 2,
-          pointRadius: 1,
-          pointHitRadius: 10,
-          data: [100, 5, 30, 20, 56, 55, 40,110,10,50,80,80],
-          spanGaps: false,
-      }
 
-  ]
-},
-height:100,
-options: {
-    scales: {
-        yAxes: [{
-            ticks: {
-                beginAtZero:true,
-                stacked:true
-            }
-        }]
-
-    },
-    legend: {
-               position:'bottom'
-           }
-
-}
-});
-Chart.defaults.global.responsive = true;
 </script>
+
+</div>
+
 
 <br/>
 
@@ -232,6 +165,67 @@ $('form').submit(function(){
   $('#m').val('');
   return false;
 });
+socket.on('user connection',function(user){
+  console.log(Object.keys(user).length);
+  var stockdataset=[];
+  for(var i=0; i< user.length;i++)
+  {
+
+    stockdataset.push({
+      label: "Facebook",
+      fill: true,
+      lineTension: 0.1,
+      backgroundColor: "rgba(555,154,192,0.4)",
+      borderColor: "rgba(555,154,192,1)",
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: "rgba(555,154,192,1)",
+      pointBackgroundColor: "#fff",
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: "rgba(555,154,192,1)",
+      pointHoverBorderColor: "rgba(220,220,220,1)",
+      pointHoverBorderWidth: 2,
+      pointRadius: 1,
+      pointHitRadius: 10,
+      data: [65, 59, 80, 81, 56, 55, 40,110,10,50,80,80],
+      spanGaps: false,
+    });
+  }
+
+  console.log(stockdataset);
+  var ctx = document.getElementById("myChart");
+  Chart.defaults.global.maintainAspectRatio = false;
+  var myChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+
+    labels: ["January", "February", "March", "April", "May", "June", "July","August","September","Octomber","November","December"],
+    datasets: stockdataset
+  },
+  height:100,
+  options: {
+      scales: {
+          yAxes: [{
+              ticks: {
+                  beginAtZero:true,
+                  stacked:true
+              }
+          }]
+
+      },
+      legend: {
+                 position:'bottom'
+             }
+
+  }
+  });
+  Chart.defaults.global.responsive = true;
+
+
+})
 socket.on('stock code',function(stockCode){
   if(stockCode === "stockerr")
   {
