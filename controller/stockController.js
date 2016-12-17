@@ -1,17 +1,33 @@
 var yahooFinance = require('yahoo-finance');
 var model= require('../model/stockmodel');
 var randomColor= require('randomcolor');
+var moment = require('moment');
+var dates= require('./dateRange');
 var connection=model.getConnection();
 
 var stock_data=model.createSchema(connection);
 
 
-
+var currentdate=moment().format('YYYY-MM-DD');
+var yearback = moment().subtract(11,'months').calendar();
+var formatedyearback=moment(yearback).format('YYYY-MM-DD');
 
 module.exports = function(app,io)
 {
   app.get('/',function(req,res){
-    res.render('index');
+
+
+    var dateStart = moment(formatedyearback);
+    var dateEnd = moment(currentdate);
+    var timeValues = [];
+
+    while (dateEnd >= dateStart) {
+       timeValues.push(dateStart.format('MMMM'));
+       dateStart.add(1,'month');
+    }
+
+
+    res.render('index',{months:timeValues});
     res.end();
   });
   io.on('connection',function(socket){
@@ -23,8 +39,8 @@ var retrivedstocks =[];
 
     yahooFinance.historical({
           symbols:retrivedstocks,
-          from:'2016-01-01',
-          to:'2016-12-01',
+          from:formatedyearback,
+          to:currentdate,
           period:'m'
         },function(err,stockhis){
 
@@ -46,14 +62,15 @@ console.log("The value of final array is"+sendfinalstock.length)
       });
       var newcolor= color.replace('rgb','rgba');
       var ncolor=(newcolor.replace(')','')).concat(',0.4)');
-      var jcolor=ncolor.concat(',0.4)');
+      var jcolor=ncolor.concat(',0.1)');
       var borderColor=ncolor.concat(',1)');
+
 
 
         console.log(color);
             var stockobj={
               label: allstocks,
-              fill: false,
+              fill: true,
               lineTension: 0.1,
               backgroundColor: jcolor,
               borderColor: borderColor,
@@ -66,7 +83,7 @@ console.log("The value of final array is"+sendfinalstock.length)
               pointBorderWidth: 1,
               pointHoverRadius: 5,
               pointHoverBackgroundColor: "rgba(255,255,255,1)",
-              pointHoverBorderColor: "rgba(220,220,220,1)",
+              pointHoverBorderColor: borderColor,
               pointHoverBorderWidth: 5,
               pointRadius: 5,
               pointHitRadius: 15,

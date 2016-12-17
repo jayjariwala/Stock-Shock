@@ -157,6 +157,7 @@
 </div>
 
 
+
 <script src="../socket.io/socket.io.js"></script>
 <script>
 var socket = io();
@@ -168,9 +169,9 @@ $('form').submit(function(){
 socket.on('user connection',function(user){
   console.log(user);
 
-
   var ctx = document.getElementById("myChart");
   Chart.defaults.global.maintainAspectRatio = false;
+
   var myChart = new Chart(ctx, {
   type: 'line',
   data: {
@@ -191,8 +192,10 @@ socket.on('user connection',function(user){
       },
       legend: {
                  position:'bottom'
-             }
-
+             },
+             hover: {
+    mode: false
+    }
   }
   });
   Chart.defaults.global.responsive = true;
