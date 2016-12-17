@@ -18,8 +18,10 @@
   "homepage": "https://github.com/jayjariwala/Stock-Shock#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "chance": "^1.0.4",
     "ejs": "^2.5.5",
     "mongoose": "^4.7.2",
+    "randomcolor": "^0.4.4",
     "socket.io": "^1.7.1",
     "yahoo-finance": "^0.2.16"
   }

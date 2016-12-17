@@ -166,36 +166,9 @@ $('form').submit(function(){
   return false;
 });
 socket.on('user connection',function(user){
-  console.log(Object.keys(user).length);
-  var stockdataset=[];
-  for(var i=0; i< user.length;i++)
-  {
+  console.log(user);
 
-    stockdataset.push({
-      label: "Facebook",
-      fill: true,
-      lineTension: 0.1,
-      backgroundColor: "rgba(555,154,192,0.4)",
-      borderColor: "rgba(555,154,192,1)",
-      borderCapStyle: 'butt',
-      borderDash: [],
-      borderDashOffset: 0.0,
-      borderJoinStyle: 'miter',
-      pointBorderColor: "rgba(555,154,192,1)",
-      pointBackgroundColor: "#fff",
-      pointBorderWidth: 1,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: "rgba(555,154,192,1)",
-      pointHoverBorderColor: "rgba(220,220,220,1)",
-      pointHoverBorderWidth: 2,
-      pointRadius: 1,
-      pointHitRadius: 10,
-      data: [65, 59, 80, 81, 56, 55, 40,110,10,50,80,80],
-      spanGaps: false,
-    });
-  }
 
-  console.log(stockdataset);
   var ctx = document.getElementById("myChart");
   Chart.defaults.global.maintainAspectRatio = false;
   var myChart = new Chart(ctx, {
@@ -203,7 +176,7 @@ socket.on('user connection',function(user){
   data: {
 
     labels: ["January", "February", "March", "April", "May", "June", "July","August","September","Octomber","November","December"],
-    datasets: stockdataset
+    datasets: user
   },
   height:100,
   options: {

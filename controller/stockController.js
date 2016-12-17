@@ -1,13 +1,13 @@
 var yahooFinance = require('yahoo-finance');
 var model= require('../model/stockmodel');
-
+var randomColor= require('randomcolor');
 var connection=model.getConnection();
 
 var stock_data=model.createSchema(connection);
 
-var retrivedstocks =[];
-var sendfinalstock =[];
-var stockprice=[];
+
+
+
 module.exports = function(app,io)
 {
   app.get('/',function(req,res){
@@ -15,10 +15,12 @@ module.exports = function(app,io)
     res.end();
   });
   io.on('connection',function(socket){
+var retrivedstocks =[];
     stock_data.find({},function(err,allstocks){
         allstocks.forEach(function(each){
           retrivedstocks.push(each.stock_code);
         })
+
     yahooFinance.historical({
           symbols:retrivedstocks,
           from:'2016-01-01',
@@ -26,41 +28,63 @@ module.exports = function(app,io)
           period:'m'
         },function(err,stockhis){
 
-          retrivedstocks.forEach(function(allstocks){
+var sendfinalstock =[];
+console.log("The value of final array is"+sendfinalstock.length)
 
+
+
+          retrivedstocks.forEach(function(allstocks){
+            var stockprice=[];
             var sobj=stockhis[allstocks];
             sobj.forEach(function(data){
               stockprice.push(data.close);
             })
 
+        var color = randomColor({
+         luminosity: 'bright',
+         format: 'rgb'
+      });
+      var newcolor= color.replace('rgb','rgba');
+      var ncolor=(newcolor.replace(')','')).concat(',0.4)');
+      var jcolor=ncolor.concat(',0.4)');
+      var borderColor=ncolor.concat(',1)');
+
+
+        console.log(color);
             var stockobj={
               label: allstocks,
-              fill: true,
+              fill: false,
               lineTension: 0.1,
-              backgroundColor: "rgba(555,154,192,0.4)",
-              borderColor: "rgba(555,154,192,1)",
+              backgroundColor: jcolor,
+              borderColor: borderColor,
               borderCapStyle: 'butt',
               borderDash: [],
               borderDashOffset: 0.0,
               borderJoinStyle: 'miter',
-              pointBorderColor: "rgba(555,154,192,1)",
+              pointBorderColor: "rgba(239,107,1,1)",
               pointBackgroundColor: "#fff",
               pointBorderWidth: 1,
               pointHoverRadius: 5,
-              pointHoverBackgroundColor: "rgba(555,154,192,1)",
+              pointHoverBackgroundColor: "rgba(255,255,255,1)",
               pointHoverBorderColor: "rgba(220,220,220,1)",
-              pointHoverBorderWidth: 2,
-              pointRadius: 1,
-              pointHitRadius: 10,
+              pointHoverBorderWidth: 5,
+              pointRadius: 5,
+              pointHitRadius: 15,
               data: stockprice,
-              spanGaps: false,
+              spanGaps: true,
             }
 
             sendfinalstock.push(stockobj);
+            console.log("The length of the object is"+allstocks);
+
 
           });
+
+
           console.log("THIS IS FINAL BOSS"+sendfinalstock);
-          io.emit('user connection',stockhis);
+
+          io.emit('user connection',sendfinalstock);
+
         });
     })
 
