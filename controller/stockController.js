@@ -2,7 +2,6 @@ var yahooFinance = require('yahoo-finance');
 var model= require('../model/stockmodel');
 var randomColor= require('randomcolor');
 var moment = require('moment');
-var dates= require('./dateRange');
 var connection=model.getConnection();
 
 var stock_data=model.createSchema(connection);
@@ -22,12 +21,14 @@ module.exports = function(app,io)
     var timeValues = [];
 
     while (dateEnd >= dateStart) {
+
        timeValues.push(dateStart.format('MMMM'));
        dateStart.add(1,'month');
     }
 
+var quotedAndCommaSeparated = "'" + timeValues.join("','") + "'";
 
-    res.render('index',{months:timeValues});
+    res.render('index',{months:quotedAndCommaSeparated});
     res.end();
   });
   io.on('connection',function(socket){

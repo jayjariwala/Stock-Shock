@@ -157,9 +157,15 @@
 </div>
 
 
-
 <script src="../socket.io/socket.io.js"></script>
+
+   <script>
+
+
+   </script>
+
 <script>
+
 var socket = io();
 $('form').submit(function(){
   socket.emit('stock code',$('#m').val());
@@ -176,7 +182,8 @@ socket.on('user connection',function(user){
   type: 'line',
   data: {
 
-    labels: ["January", "February", "March", "April", "May", "June", "July","August","September","Octomber","November","December"],
+
+    labels: [ <%-months%> ],
     datasets: user
   },
   height:100,
