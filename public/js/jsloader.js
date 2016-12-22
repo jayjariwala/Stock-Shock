@@ -11,10 +11,11 @@ function stockeffect()
   $('#graph').hide();
   $('.confirm').hide();
   $('.code_buttons').css("height","50px");
+}
 
-
-  $('.rmv').click(function(){
-    $('.confirm').show();
-    $('.code_buttons').css("height","80px");
-  })
+function enable(value)
+{
+  console.log("Enable is being called"+value);
+$('.con'+value).show();
+$('.code'+value).css("height","80px");
 }
