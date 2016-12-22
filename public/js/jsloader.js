@@ -1,7 +1,13 @@
 
 
 $(document).ready(function(){
-  console.log("print this");
+
+
+})
+
+function stockeffect()
+{
+  console.log("it is being called");
   $('#graph').hide();
   $('.confirm').hide();
   $('.code_buttons').css("height","50px");
@@ -11,8 +17,4 @@ $(document).ready(function(){
     $('.confirm').show();
     $('.code_buttons').css("height","80px");
   })
-
-
-
-
-})
+}

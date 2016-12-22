@@ -91,7 +91,7 @@ console.log("The value of final array is"+sendfinalstock.length)
               data: stockprice,
               spanGaps: true,
             }
-
+             
             sendfinalstock.push(stockobj);
             console.log("The length of the object is"+allstocks);
 

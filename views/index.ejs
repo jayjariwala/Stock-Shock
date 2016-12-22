@@ -115,38 +115,14 @@
    </div>
  </form>
    <div class="stocks">
-        <div class="row">
-          <div class="col-lg-2 code_buttons">
-            <i class="fa fa-remove rmv"></i>
-          <center>
-
-              <div class="c_text">Facebook <br/>
-
-              </div>
-              <div class="confirm">
-                <button class="btn btn-success btn-xs button">Discard</button><button class="btn btn-danger btn-xs button">Keep</button>
-              </div>
-
-          </div>
-
-
-          <div class="col-lg-2 code_buttons">
-            <i class="fa fa-remove rmv"></i>
-          <center>
-
-              <div class="c_text">Facebook <br/>
-
-              </div>
-
-                <div class="confirm">
-              <button class="btn btn-success btn-xs button">Discard</button><button class="btn btn-danger btn-xs button">Keep</button>
-            </div>
-          </div>
+        <div class="row stock-code">
 
 
 
 
         </div>
+
+
 
   </div>
 
@@ -159,10 +135,7 @@
 
 <script src="../socket.io/socket.io.js"></script>
 
-   <script>
 
-
-   </script>
 
 <script>
 
@@ -173,7 +146,7 @@ $('form').submit(function(){
   return false;
 });
 socket.on('user connection',function(user){
-  console.log(user);
+
 
   var ctx = document.getElementById("myChart");
   Chart.defaults.global.maintainAspectRatio = false;
@@ -206,7 +179,13 @@ socket.on('user connection',function(user){
   }
   });
   Chart.defaults.global.responsive = true;
-
+  console.log(user[0].label);
+  $('.stock-code').html('');
+  for(var i=0;i<user.length;i++)
+  {
+    $('.stock-code').append("<div class='col-lg-2 code_buttons'><i class='fa fa-remove rmv'></i><center><div class='c_text'>"+user[i].label +"<br/></div><div class='confirm'><button class='btn btn-success btn-xs button'>Discard</button><button class='btn btn-danger btn-xs button'>Keep</button></div></div>");
+  }
+  stockeffect();
 
 })
 socket.on('stock code',function(stockCode){
