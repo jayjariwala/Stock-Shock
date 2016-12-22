@@ -1,5 +1,6 @@
 var yahooFinance = require('yahoo-finance');
 var model= require('../model/stockmodel');
+var stocksdata=require('./retriveAllStocks');
 var randomColor= require('randomcolor');
 var moment = require('moment');
 var connection=model.getConnection();
@@ -14,6 +15,7 @@ var formatedyearback=moment(yearback).format('YYYY-MM-DD');
 module.exports = function(app,io)
 {
   app.get('/',function(req,res){
+
 
 
     var dateStart = moment(formatedyearback);
@@ -32,6 +34,9 @@ var quotedAndCommaSeparated = "'" + timeValues.join("','") + "'";
     res.end();
   });
   io.on('connection',function(socket){
+
+    var status=stocksdata.getallstocks();
+    console.log(status);
 var retrivedstocks =[];
     stock_data.find({},function(err,allstocks){
         allstocks.forEach(function(each){
@@ -91,7 +96,7 @@ console.log("The value of final array is"+sendfinalstock.length)
               data: stockprice,
               spanGaps: true,
             }
-             
+
             sendfinalstock.push(stockobj);
             console.log("The length of the object is"+allstocks);
 
@@ -137,11 +142,11 @@ console.log("The value of final array is"+sendfinalstock.length)
                       console.log(retrivedstocks.toString());
                   yahooFinance.historical({
                         symbols:retrivedstocks,
-                        from:'2016-01-01',
-                        to:'2016-12-01',
+                        from:formatedyearback,
+                        to:currentdate,
                         period:'m'
                       },function(err,stockhis){
-                        console.log(stockhis);
+                        console.log("what is this?"+stockhis);
                       });
                   })
                 });
