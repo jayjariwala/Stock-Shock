@@ -35,9 +35,9 @@ var quotedAndCommaSeparated = "'" + timeValues.join("','") + "'";
   });
   io.on('connection',function(socket){
 
-    var status=stocksdata.getallstocks();
-    console.log(status);
-var retrivedstocks =[];
+    var sendfinalstock=stocksdata.getallstocks(stock_data,yahooFinance,randomColor,io);
+
+  /*  var retrivedstocks =[];
     stock_data.find({},function(err,allstocks){
         allstocks.forEach(function(each){
           retrivedstocks.push(each.stock_code);
@@ -103,13 +103,15 @@ console.log("The value of final array is"+sendfinalstock.length)
 
           });
 
+*/
+//          console.log("THIS IS FINAL BOSS"+sendfinalstock);
 
-          console.log("THIS IS FINAL BOSS"+sendfinalstock);
+      //    console.log(">>>>>PRINT AN OBJECT"+sendfinalstock);
 
-          io.emit('user connection',sendfinalstock);
+      //    io.emit('user connection',sendfinalstock);
 
-        });
-    })
+//        });
+//    })
 
     socket.on('stock code',function(stockCode){
       yahooFinance.snapshot({symbol:stockCode,fields:['n']},function(err,snapshot){
@@ -133,7 +135,8 @@ console.log("The value of final array is"+sendfinalstock.length)
                 userstock.save(function(err){
                   if(err) throw err;
                   console.log("information stored successfully");
-                  stock_data.find({},function(err,allstocks){
+                  stocksdata.getallstocks(stock_data,yahooFinance,randomColor,io);
+                /*  stock_data.find({},function(err,allstocks){
 
                       allstocks.forEach(function(each){
 
@@ -148,7 +151,7 @@ console.log("The value of final array is"+sendfinalstock.length)
                       },function(err,stockhis){
                         console.log("what is this?"+stockhis);
                       });
-                  })
+                  }) */
                 });
             }
             else {
