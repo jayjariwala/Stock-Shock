@@ -46,7 +46,9 @@ var quotedAndCommaSeparated = "'" + timeValues.join("','") + "'";
         console.log("CLIENT SESSION ID:::"+sessionid);
         if(snapshot.name==null)
         {
+          //send it to specific user
            io.sockets.connected[sessionid].emit('stock code','stockerr');
+
         }
         else {
           stock_data.find({stock_code : stockCode},function(err,available){
