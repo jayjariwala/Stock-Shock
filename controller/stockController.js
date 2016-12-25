@@ -38,6 +38,7 @@ var quotedAndCommaSeparated = "'" + timeValues.join("','") + "'";
 
 
     socket.on('stock code',function(stockCode){
+      console.log("Goes into stop code");
       yahooFinance.snapshot({symbol:stockCode,fields:['n']},function(err,snapshot){
         var sessionid=socket.id;
         console.log("CLIENT SESSION ID:::"+sessionid);
@@ -51,6 +52,7 @@ var quotedAndCommaSeparated = "'" + timeValues.join("','") + "'";
           stock_data.find({stock_code : stockCode},function(err,available){
             if(available =="")
             {
+
               var timestamp = Math.floor(Date.now() /1000);
               var processid= process.pid;
               var ranNum = Math.random() * (100 - 0) + 100;

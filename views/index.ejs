@@ -155,49 +155,89 @@ socket.on('user connection',function(user){
 console.log(user);
   var ctx = document.getElementById("myChart");
   Chart.defaults.global.maintainAspectRatio = false;
-
-  var myChart = new Chart(ctx, {
-  type: 'line',
-  data: {
-
-
-    labels: [ <%-months%> ],
-    datasets: user
-  },
-  height:100,
-  options: {
-      scales: {
-          yAxes: [{
-              ticks: {
-                  beginAtZero:true,
-                  stacked:true
-              }
-          }]
-
-      },
-      legend: {
-                 position:'bottom'
-             },
-             hover: {
-    mode: false
-    }
-  }
-  });
-  Chart.defaults.global.responsive = true;
-  console.log(user[0].label);
-  $('.stock-code').html('');
-  for(var i=0;i<user.length;i++)
+console.log("print user"+user);
+  if(user == null)
   {
-    $('.stock-code').append("<div class='col-lg-2 code_buttons code"+i+"'><i class='fa fa-remove rmv' onClick='enable("+i+")'></i><center><div class='c_text'>"+user[i].label +"<br/></div><div class='confirm con"+i+"'><button class='btn btn-success btn-xs button' onClick='discard(\""+user[i].label+"\")'>Discard</button><button class='btn btn-danger btn-xs button'>Keep</button></div></div>");
+    $('.stock-code').html('');
+    console.log("GOES IN>>>")
+    var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: [ ],
+      datasets: user
+    },
+    height:100,
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true,
+                    stacked:true
+                }
+            }]
 
-  /*  $('.rmv').click(function(){
-      $('.confirm').show();
-      $('.code_buttons').css("height","80px");
-    })
+        },
+        legend: {
+                   position:'bottom'
+               },
+               hover: {
+      mode: false
+      }
+    }
+    });
+    Chart.defaults.global.responsive = true;
 
-    */
   }
-  stockeffect();
+  else {
+
+    var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+
+
+      labels: [ <%-months%> ],
+      datasets: user
+    },
+    height:100,
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true,
+                    stacked:true
+                }
+            }]
+
+        },
+        legend: {
+                   position:'bottom'
+               },
+               hover: {
+      mode: false
+      }
+    }
+    });
+    Chart.defaults.global.responsive = true;
+
+
+
+      $('.stock-code').html('');
+      for(var i=0;i<user.length;i++)
+      {
+        $('.stock-code').append("<div class='col-lg-2 code_buttons code"+i+"'><i class='fa fa-remove rmv' onClick='enable("+i+")'></i><center><div class='c_text'>"+user[i].label +"<br/></div><div class='confirm con"+i+"'><button class='btn btn-success btn-xs button' onClick='discard(\""+user[i].label+"\")'>Discard</button><button class='btn btn-danger btn-xs button'>Keep</button></div></div>");
+
+      /*  $('.rmv').click(function(){
+          $('.confirm').show();
+          $('.code_buttons').css("height","80px");
+        })
+
+        */
+      }
+      stockeffect();
+
+
+  }
+
 
 })
 socket.on('stock code',function(stockCode){

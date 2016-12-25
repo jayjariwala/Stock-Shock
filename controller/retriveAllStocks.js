@@ -9,7 +9,17 @@ module.exports =
   {
     var retrivedstocks =[];
      stock_data.find({},function(err,allstocks){
-         allstocks.forEach(function(each){
+      if(allstocks.length ===0)
+      {
+        console.log("Value of All stocks"+allstocks.length);
+
+
+
+        io.emit('user connection',null);
+      }
+else {
+
+      allstocks.forEach(function(each){
            retrivedstocks.push(each.stock_code);
          })
 
@@ -77,7 +87,7 @@ module.exports =
 
          });
 
-
+       }
 
         })
 
