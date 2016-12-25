@@ -145,6 +145,11 @@ $('form').submit(function(){
   $('#m').val('');
   return false;
 });
+
+function discard(value)
+{
+socket.emit('discard',value);
+}
 socket.on('user connection',function(user){
 
 console.log(user);
@@ -183,7 +188,7 @@ console.log(user);
   $('.stock-code').html('');
   for(var i=0;i<user.length;i++)
   {
-    $('.stock-code').append("<div class='col-lg-2 code_buttons code"+i+"'><i class='fa fa-remove rmv' onClick='enable("+i+")'></i><center><div class='c_text'>"+user[i].label +"<br/></div><div class='confirm con"+i+"'><button class='btn btn-success btn-xs button'>Discard</button><button class='btn btn-danger btn-xs button'>Keep</button></div></div>");
+    $('.stock-code').append("<div class='col-lg-2 code_buttons code"+i+"'><i class='fa fa-remove rmv' onClick='enable("+i+")'></i><center><div class='c_text'>"+user[i].label +"<br/></div><div class='confirm con"+i+"'><button class='btn btn-success btn-xs button' onClick='discard(\""+user[i].label+"\")'>Discard</button><button class='btn btn-danger btn-xs button'>Keep</button></div></div>");
 
   /*  $('.rmv').click(function(){
       $('.confirm').show();

@@ -19,3 +19,8 @@ function enable(value)
 $('.con'+value).show();
 $('.code'+value).css("height","80px");
 }
+
+function discard()
+{
+  console.log("Discard is being called");
+}

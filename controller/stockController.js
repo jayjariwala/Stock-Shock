@@ -4,10 +4,7 @@ var stocksdata=require('./retriveAllStocks');
 var randomColor= require('randomcolor');
 var moment = require('moment');
 var connection=model.getConnection();
-
 var stock_data=model.createSchema(connection);
-
-
 var currentdate=moment().format('YYYY-MM-DD');
 var yearback = moment().subtract(11,'months').calendar();
 var formatedyearback=moment(yearback).format('YYYY-MM-DD');
@@ -86,6 +83,13 @@ var quotedAndCommaSeparated = "'" + timeValues.join("','") + "'";
       })
 
     });
+
+    socket.on('discard',function(value){
+      stock_data.findOneAndRemove({stock_code: value},function(err,docs){
+        if(err) throw err;
+        stocksdata.getallstocks(stock_data,yahooFinance,randomColor,io);
+      })
+    })
 
   })
 
